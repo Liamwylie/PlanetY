@@ -105,11 +105,6 @@ public class LevelSelectScript : MonoBehaviour
         GUI.Label(new Rect(750, 240, 100, 100), sCom);
         GUI.Label(new Rect(750, 290, 100, 100), sUlt);
 
-        if (GUI.Button(Back, "Back"))
-        {
-            Application.LoadLevel("Menu");
-        }
-
 
         if (GUI.Button(Level1, "Level 1"))
         {
