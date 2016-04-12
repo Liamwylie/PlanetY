@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject Cam; 
     public bool grounded = false;
     public bool ceilinged = false;
+    public char direction = 'R';
    // public bool MobAbi_TrippleJump = true;
 
 
@@ -267,13 +268,15 @@ public class Player : MonoBehaviour
 
     public void RotateLeft()
     {
-        playerTransform.transform.eulerAngles = new Vector2(0, 0);  
+        playerTransform.transform.eulerAngles = new Vector2(0, 0);
+        direction = 'R';
     }
 
 
     public void RotateRight()
     {
         playerTransform.transform.eulerAngles = new Vector2(0, 180);
+        direction = 'L';
     }
 
 
