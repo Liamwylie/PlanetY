@@ -7,8 +7,8 @@ public class Abilities : MonoBehaviour {
 	public GameObject Blaster,Sniper,Grenade,Mine,Laser;
 	private int iAmmo;
 	private float fCooldown = 10.0f, fCurrentCooldown;
-	public float bulletSpeed = 5.0f;
-	Vector3 ShootDir;
+	private float bulletSpeed;
+	Vector2 ShootDir;
 	GameObject Projectile;
 
     public Vector3 returnShootDir()
@@ -22,19 +22,15 @@ public class Abilities : MonoBehaviour {
     }
 
 
-    void shootblaster(int x,int y,int z)
+    void shootblaster()
     {
-        if (ShootDir.x == 1)
-            bulletSpeed = 5.0f;
-        if (ShootDir.x == -1)
-            bulletSpeed = -5.0f;
         Projectile = (GameObject)Instantiate(Blaster, transform.position, transform.rotation);
        
     }
 
 
 	void start() {
-        ShootDir.x = 1;
+		ShootDir.x = 50;
 		switch(iAbilityChosen)
 		{
 			//blaster
@@ -63,10 +59,14 @@ public class Abilities : MonoBehaviour {
 		
 		
 	void Update() {
-        if (Input.GetKeyDown("d"))
-        ShootDir.x = 1;
-        if (Input.GetKeyDown("a"))
-        ShootDir.x = -1;
+        if (Input.GetKeyDown ("d")) {
+			ShootDir.x = 50;
+			Debug.Log (ShootDir.x);
+		}
+        if (Input.GetKeyDown ("a")) {
+			ShootDir.x = -50;
+			Debug.Log (ShootDir.x);
+		}
         if (fCurrentCooldown <=0)
 		{
 			fCurrentCooldown = 0;
@@ -74,12 +74,11 @@ public class Abilities : MonoBehaviour {
 			switch(iAbilityChosen)
 			{
 			case 1:
-                        shootblaster(1, 0, 0);
+                        shootblaster();
                         fCurrentCooldown = 1.0f;
                         break;
 			case 2: 
 					ShootDir = Input.mousePosition;
-					ShootDir.z = 0;
 					ShootDir = Camera.main.ScreenToWorldPoint(ShootDir);
 					ShootDir = ShootDir-transform.position;
 					Projectile = (GameObject)Instantiate(Sniper, transform.position, transform.rotation);
@@ -97,5 +96,6 @@ public class Abilities : MonoBehaviour {
 
 		}
 		if(fCurrentCooldown > 0)fCurrentCooldown -= Time.deltaTime;
+
     }
 }

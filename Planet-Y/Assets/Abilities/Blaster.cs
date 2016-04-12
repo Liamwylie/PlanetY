@@ -4,19 +4,24 @@ using System.Collections;
 
 
 public class Blaster : MonoBehaviour {
-
-    public Abilities info;
-    Vector3 ShootDire;
+	
+    public Vector2 ShootDire;
     private float bulletSpeedy;
 
     // Use this for initialization
     void Start () {
+		GameObject thePlayer = GameObject.Find ("Player");
+		Abilities info = thePlayer.GetComponent<Abilities>();
         ShootDire = info.returnShootDir();
-        bulletSpeedy = info.returnBulletSpeed();
+		this.GetComponent<Rigidbody2D> ().AddForce (ShootDire, ForceMode2D.Impulse);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-    this.gameObject.transform.position += new Vector3(ShootDire.x, ShootDire.y, ShootDire.z) * bulletSpeedy * Time.deltaTime;
+		Debug.Log (bulletSpeedy);
+		//if (ShootDire.x == 1)
+   		//	 this.gameObject.transform.position += ShootDire * bulletSpeedy * Time.deltaTime;
+		//if (ShootDire.x == -1)
+			
     }
 }
